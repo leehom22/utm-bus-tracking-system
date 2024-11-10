@@ -1,5 +1,6 @@
 body{
   margin: 0;
+  overflow: hidden;
 }
 
 .top{
@@ -33,6 +34,11 @@ body{
     width: 70px;
   }
   
+  .map{
+    width: 500px;
+    height: 500px;
+    margin: 100px;
+  }
   .top-right{
   position: relative;
   display: flex;
