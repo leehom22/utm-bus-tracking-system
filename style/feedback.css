@@ -1,0 +1,83 @@
+.feedback{
+  position: fixed;
+  z-index: 1;
+  width: 500px;
+  top: 100px;
+  left: 100px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeed;
+}
+
+.feedback-cancel{
+  width: 30px;
+  
+  margin-left:420px;
+  
+}
+
+.feedback-cancel:hover{
+  cursor: pointer;
+}
+
+.grid-feedback{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.instruction, .instruction-2{
+  font-size: 22px;
+  font-family: roboto;
+  font-weight: bold;
+}
+
+.submit-button{
+  font-size: 15px;
+  font-family: roboto;
+  width: 100px;
+  padding: 10px 20px 10px 20px ;
+  border: none;
+  background-color: gray;
+  font-weight: bold;
+  border-radius: 20px;
+  color: white;
+}
+
+.submit-button:hover{
+  background-color: rgb(172, 172, 172);
+  cursor: pointer;
+}
+.instruction, .div-star, .submit-button, .instruction-2, .textbox{
+  margin-top: 20px;
+}
+
+.star{
+  width: 20px;
+}
+
+.grid-comment-feedback{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.textbox{
+  background-color: rgb(186, 186, 186);
+  border: none;
+  height: 200px;
+  width: 300px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  color: white;
+  
+}
+

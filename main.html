@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+c
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style/main.css">
   <link rel="stylesheet" href="/style/location.css">
   <link rel="stylesheet" href="/style/feedback.css">
+  <link rel="stylesheet" href="/style/news.css">
   <title>Precisely</title>
 </head>
 <body>
@@ -26,15 +26,15 @@
     </div>
 
     <div class="left"> 
-      <div class="grid">
+      <div class="grid js-dropout-img ">
         <img class="icon" src="/image/bus-icon.svg" alt="Bus">
         <div class="title">Location</div>
       </div>
-      <div class="grid">
+      <div class="grid js-news-img">
         <img class="icon" src="/image/news-icon.svg" alt="News">
         <div class="title">News</div>
       </div>
-      <div class="grid">
+      <div class="grid js-feedback-img">
         <img class="icon" src="/image/feedback-icon.svg" alt="Feedback">
         <div class="title">Feedback</div>   
       </div>
@@ -46,207 +46,25 @@
      <img class="map" src="/image/sample-map.png" alt="UTM MAP">
     </div>
 
-    <div class="dropout-location">
-      <div class="grid-title">Bus</div>
-      <div class="grid-route">
-        <div class="bus-route">A1</div>
-        <div class="bus-route">A2</div>
-        <div class="bus-route">B1</div>
-        <div class="bus-route">B2</div>
-        <div class="bus-route">B3</div>
-        <div class="bus-route">C1</div>
-        <div class="bus-route">C2</div>
-        <div class="bus-route">C3</div>
-        <div class="bus-route">D1</div>
-        <div class="bus-route">D2</div>
-        <div class="bus-route">E1</div>
-        <div class="bus-route">E2</div>
-        <div class="bus-route">E3</div>
-        <div class="bus-route">F1</div>
-        <div class="bus-route">F2</div>
-        <div class="bus-route">G1</div>
-        <div class="bus-route">G2</div>
-        <div class="bus-route">G3</div>
-        <div class="bus-route">H</div>
-      </div>
+    <div class="js-dropout-location">
+      <!--bus-route will show here-->
     </div> 
 
-    <div class="schedule">
-      <div class="direct-route">A1: KP -CP-JLN AMAL- KP</div>
-      <div class="estimated-arrival-time">Estimated arrival time at KP(U5):</div>
-      <div class="show-time">
-        <div class="specific-time">7:45am</div>
-        <img class="arrow-down" src="/image/down-arrow.svg">
-      </div>
-      <div class="main-schedule">
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="grid-schdule">
-          <div class="arrival-time">
-            <img class="circle" src="/image/no-fill-circle.svg" >
-            <svg class="line" width="800" height="100">
-              <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-            </svg>          
-            <div class="time">7:45am</div>
-          </div>
-        </div>
-        <div class="schedule-bottom">bottom</div>
-      </div>
-
+    <div class="js-schedule">
+      <!--schedule will show here-->
     </div>    
 
-    <div class="news">
-      <div class="news-heaader">News</div>
-      <div class="grid-news"> 
-        <div class="new-title">UTM Shutle will be provided during convo week </div>
-        <div class="new-time">6 November 2024 4:29pm GMT+8</div>
-        <div class="news-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </div>
+    <div class="js-news">
+      <!--news will show here-->
+    </div>
 
+    <div class="js-feedback">
+      <!--feedback show here-->
     </div>
 
 </body>
+<script type="module" src="/script/main.js"></script>
+<script type="module" src="/script/location.js"> </script>
+<script type="module" src="/script/news.js"></script>
+<script type="module" src="/script/feedback.js"></script>
 </html>
