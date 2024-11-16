@@ -1,14 +1,21 @@
-import { showNews, toogle } from "./news.js";
+import { showNews } from "./news.js";
 import { showBusRoute } from "./location.js";
+import { toogle } from "./main.js";
 
 let isFeedbackVisible=false;
 export function showFeedback(openClose=isFeedbackVisible) {
   isFeedbackVisible=openClose
+
+  function closeFeedback(){
+    document.querySelector('.js-feedback-cancel').addEventListener('click',()=>{
+      showFeedback(false)
+    })
+  }
   if(isFeedbackVisible===true){
     let feedback = `
   
     <div class="feedback">
-      <img class="feedback-cancel" src="/image/cancel-feedback.svg">
+      <img class="feedback-cancel js-feedback-cancel" src="/image/cancel-feedback.svg">
       <div class="grid-feedback">
         <div class="instruction">Please rate your experience with this website</div>
         <div class="div-star">
@@ -48,20 +55,26 @@ export function showFeedback(openClose=isFeedbackVisible) {
         let submitComment=`
           <div class="feedback">
     
-          <div class="thanks-submit">Thans for your feedback </div>
-    
+          <img class="feedback-cancel-last js-feedback-cancel" src="/image/cancel-feedback.svg">   
+          <div class="thanks-submit">Thanks for your feedback </div>
+
           </div>
         `
-    
         if(comment){
           document.querySelector('.js-feedback').innerHTML = submitComment;
         }
+        
+
+        closeFeedback();
       })
     })
+    
+    closeFeedback();
     return true
   }
   else if(isFeedbackVisible===false){
     document.querySelector('.js-feedback').innerHTML = ``;
+
     return false
   }
 }

@@ -1,5 +1,6 @@
 import { showBusRoute } from "./location.js";
 import { showFeedback } from "./feedback.js";
+import { toogle } from "./main.js";
 
 let isNewsVisible=false
 export function showNews(openClose=isNewsVisible) {
@@ -9,7 +10,7 @@ export function showNews(openClose=isNewsVisible) {
     <div class="news">
       <div class="news-header">
         What's Happening
-      <img class="news-cancel" src="/image/x-cancel.svg" alt="cancel">
+      <img class="news-cancel js-cancel-news" src="/image/x-cancel.svg" alt="cancel">
       </div>
       <div class="main-grid-news">
         <div class="grid-news"> 
@@ -67,9 +68,16 @@ export function showNews(openClose=isNewsVisible) {
     </div>
     `
     document.querySelector('.js-news').innerHTML = theNews;
+    document.querySelector('.js-cancel-news').addEventListener('click',()=>{
+      showNews(false)
+    })
+    
+
+
     return true;
   }else if(isNewsVisible===false){
     document.querySelector('.js-news').innerHTML = ''
+
     return false;
   }
   
@@ -82,31 +90,6 @@ const clickElement=document.querySelector('.js-news-img');
 const placeElement= document.querySelector('.js-news')
 
 
-export function toogle(clickElement,placeElement,funMain,fun2,fun3){
-  let isVisible = false;
-
-  function openWeb(){
-    clickElement.addEventListener('click', () => {
-    fun2(false);
-    fun3(false)
-
-      if(isVisible===true){
-        funMain(false)
-        isVisible=false
-        console.log('tab close')
-      }
-      else{
-        funMain(true);
-        isVisible=true;
-        console.log('tab open')
-      }
-      
-      })
-
-  }
-  openWeb();
- 
-}
 
 toogle(clickElement,placeElement,showNews,showBusRoute,showFeedback);
 
