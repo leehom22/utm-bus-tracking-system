@@ -1,5 +1,6 @@
-const schedule=[{
-  id:'A1',
+export const schedule=[{
+  id:'0001',
+  name:'A1',
   route:'A1: KP -CP-JLN AMAL- KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -14,7 +15,8 @@ const schedule=[{
   busStop7:'D01',
   busStop8:'Center Point',
 },{
-  id:'A2',
+  id:'0002',
+  name:'A2',
   route:'A2: KP -CP-JLN AMAL- KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -30,7 +32,8 @@ const schedule=[{
   busStop8:'Center Point',
 
 },{
-  id:'B1',
+  id:'0003',
+  name:'B1',
   route:'B1: KP -K9/10 -T02 -T08 -K9/10 -KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'T02',
@@ -46,7 +49,8 @@ const schedule=[{
   busStop8:'U5',
   
 },{
-  id:'B2',
+  id:'0004',
+  name:'B2',
   route:'B2: KP -K9/10 -T02 -T08 -K9/10 -KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'T02',
@@ -61,7 +65,8 @@ const schedule=[{
   busStop7:'UB2',
   busStop8:'U5',
 },{
-  id:'B3',
+  id:'0005',
+  name:'B3',
   route:'B3: KP -K9/10 -T02 -T08 -K9/10 -KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'T02',
@@ -76,7 +81,8 @@ const schedule=[{
   busStop7:'UB2',
   busStop8:'U5',
 },{
-  id:'C1',
+  id:'0006',
+  name:'C1',
   route:'C1: K9/10 -KTC -CP -JLN AMAL -KTC -K9/10',
   startingPoint1:'KP(UA2)',
   startingPoint2:'CP',
@@ -91,7 +97,8 @@ const schedule=[{
   busStop7:'D01',
   busStop8:'Center Point',
 },{
-  id:'C2',
+  id:'0007',
+  name:'C2',
   route:'C2: K9/10 -KTC -CP -JLN AMAL -KTC -K9/10',
   startingPoint1:'KP(UA2)',
   startingPoint2:'CP',
@@ -106,7 +113,8 @@ const schedule=[{
   busStop7:'D01',
   busStop8:'Center Point',
 },{
-  id:'C3',
+  id:'0008',
+  name:'C3',
   route:'C3: K9/10 -KTC -CP -JLN AMAL -KTC -K9/10',
   startingPoint1:'KP(UA2)',
   startingPoint2:'CP',
@@ -121,7 +129,8 @@ const schedule=[{
   busStop7:'D01',
   busStop8:'Center Point',
 },{
-  id:'D1',
+  id:'0009',
+  name:'D1',
   route:'D1: KDOJ, KLG, KDSE, PKU, CP, JLN AMAL, KDOJ',
   startingPoint1:'XC1',
   startingPoint2:'CP',
@@ -136,7 +145,8 @@ const schedule=[{
   busStop7:'G13',
   busStop8:'Center Point',
 },{
-  id:'D2',
+  id:'0010',
+  name:'D2',
   route:'D2: KDOJ, KLG, KDSE, PKU, CP, JLN AMAL, KDOJ',
   startingPoint1:'XC1',
   startingPoint2:'CP',
@@ -152,7 +162,8 @@ const schedule=[{
   busStop7:'G13',
   busStop8:'Center Point',
 },{
-  id:'E1',
+  id:'0011',
+  name:'E1',
   route:'E1: KDOJ -KLG -KDSE -T02 -T08 -KDOJ ',
   startingPoint1:'KDOJ(XC1)',
   startingPoint2:'T02',
@@ -167,7 +178,8 @@ const schedule=[{
   busStop7:'S38',
   busStop8:'T02',
 },{
-  id:'E2',
+  id:'0012',
+  name:'E2',
   route:'E2: KDOJ -KLG -KDSE -T02 -T08 -KDOJ ',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -182,7 +194,8 @@ const schedule=[{
   busStop7:'S38',
   busStop8:'T02',
 },{
-  id:'E3',
+  id:'0013',
+  name:'E3',
   route:'E3: KDOJ -KLG -KDSE -T02 -T08 -KDOJ ',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -197,7 +210,8 @@ const schedule=[{
   busStop7:'S38',
   busStop8:'T02',
 },{
-  id:'F1',
+  id:'0014',
+  name:'F1',
   route:'F1:KTR -KTHO -KTDI -JLN AMAL -CP -KTR',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -212,7 +226,8 @@ const schedule=[{
   busStop7:'D01',
   busStop8:'Center Point',
 },{
-  id:'F2',
+  id:'0015',
+  name:'F2',
   route:'A2: KP -CP-JLN AMAL- KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -227,7 +242,8 @@ const schedule=[{
   busStop7:'D01',
   busStop8:'Center Point',
 },{
-  id:'G1',
+  id:'0016',
+  name:'G1',
   route:'A2: KP -CP-JLN AMAL- KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -242,7 +258,8 @@ const schedule=[{
   busStop7:'P19',
   busStop8:'Center Point',
 },{
-  id:'G2',
+  id:'0017',
+  name:'G2',
   route:'A2: KP -CP-JLN AMAL- KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -257,7 +274,8 @@ const schedule=[{
   busStop7:'P19',
   busStop8:'Center Point',
 },{
-  id:'G3',
+  id:'0018',
+  name:'G3',
   route:'A2: KP -CP-JLN AMAL- KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
@@ -272,7 +290,8 @@ const schedule=[{
   busStop7:'P19',
   busStop8:'Center Point',
 },{
-  id:'H',
+  id:'0019',
+  name:'H',
   route:'A2: KP -CP-JLN AMAL- KP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
