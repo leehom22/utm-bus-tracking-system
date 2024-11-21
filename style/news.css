@@ -5,6 +5,7 @@
   top: 100px;
   bottom: 0;
   width: 500px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -39,6 +40,8 @@
 
 .main-grid-news{
   position: absolute;
+  display: flex;
+  flex-direction: column; 
   background-color:  #A6A6A6;
   height: 560px;
   overflow-y: scroll;
@@ -52,9 +55,18 @@
   width: 480px;
   font-family: roboto;
   margin-top: 20px;
-  margin-left: 10px;
+  padding-left: 10px;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
 .news-title{
   font-size: 30px;
   margin-bottom: 10px;

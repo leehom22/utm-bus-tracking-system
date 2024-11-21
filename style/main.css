@@ -39,7 +39,7 @@ body{
 
   }
   
-  .div-map{
+  #map{
     position: absolute;
     width: auto;
     height: auto;

@@ -40,10 +40,8 @@ c
       </div>
     </div>
 
-    <div class="div-map">
-      <div class="map-route">A1 :KP - CP - JLN AMAL - KP</div>
-      <button class="cancel">Cancel</button>
-     <img class="map" src="/image/sample-map.png" alt="UTM MAP">
+    <div id="map" >
+ 
     </div>
 
       <div class="js-dropout-location">
@@ -64,4 +62,30 @@ c
 <script type="module" src="/script/location.js"> </script>
 <script type="module" src="/script/news.js"></script>
 <script type="module" src="/script/feedback.js"></script>
+<script type="module" src="/script/maps.js"></script>
+
+<script 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8&loading=async&callback=initMap"
+    async>
+</script>
+
+<script>
+  let map;
+  let latitude=1.559924320502762;
+  let longtitude=103.63481826803871;
+
+async function initMap() {
+  const { Map } = await google.maps.importLibrary("maps");
+
+  map = new Map(document.getElementById("map"), {
+    center: { lat: latitude, lng: longtitude },
+    zoom: 8,
+  });
+}
+/*
+1.559924320502762, 103.63481826803871
+*/
+
+initMap();
+</script>
 </html>

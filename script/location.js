@@ -15,102 +15,111 @@ export function showBusRoute(openClose=isLocationVisible){
     `
     let route=``;
     let busSchedule=``
+    let busArrivalTime1=``;
+    let busArrivalTime2=``;
+
 
     schedule.forEach((schdules)=>{ /*forEach() */
       route+=`
-        <div class="bus-route js-bus-${schdules.name}" >${schdules.name}</div>
+        <button class="bus-route js-bus js-bus-${schdules.name}" data-bus-id="${schdules.id}">${schdules.name}</button>
     `
-    
-
     })
 
-  busSchedule=`
-<div class="schedule">
-    <div class="direct-route">A1: KP -CP-JLN AMAL- KP</div>
-    <div class="estimated-arrival-time js-estimated-1">Estimated arrival time at KP(U5):</div>
-    <div class="estimated-arrival-time js-estimated-2">Estimated arrival time at CP:</div>
-    <div class="main-schedule">
-    <div class="grid-schdule">
-      <div class="arrival-time">
-        <img class="circle" src="/image/no-fill-circle.svg" >
-        <svg class="line" width="800" height="100">
-          <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-        </svg>          
-        <div class="bus-stop">Center Point</div>
-      </div>
-    </div>
-    <div class="grid-schdule">
-      <div class="arrival-time">
-        <img class="circle" src="/image/no-fill-circle.svg" >
-        <svg class="line" width="800" height="100">
-          <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-        </svg>          
-        <div class="bus-stop">Center Point</div>
-      </div>
-    </div>
-    <div class="grid-schdule">
-      <div class="arrival-time">
-        <img class="circle" src="/image/no-fill-circle.svg" >
-        <svg class="line" width="800" height="100">
-          <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-        </svg>          
-        <div class="bus-stop">Center Point</div>
-      </div>
-    </div>
-    <div class="grid-schdule">
-      <div class="arrival-time">
-        <img class="circle" src="/image/no-fill-circle.svg" >
-        <svg class="line" width="800" height="100">
-          <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-        </svg>          
-        <div class="bus-stop">Center Point</div>
-      </div>
-    </div>
-    <div class="grid-schdule">
-      <div class="arrival-time">
-        <img class="circle" src="/image/no-fill-circle.svg" >
-        <svg class="line" width="800" height="100">
-          <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-        </svg>          
-        <div class="bus-stop">Center Point</div>
-      </div>
-    </div>
-    <div class="grid-schdule">
-      <div class="arrival-time">
-        <img class="circle" src="/image/no-fill-circle.svg" >
-        <svg class="line" width="800" height="100">
-          <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-        </svg>          
-        <div class="bus-stop">Center Point</div>
-      </div>
-    </div>
-    <div class="grid-schdule">
-      <div class="arrival-time">
-        <img class="circle" src="/image/no-fill-circle.svg" >
-        <svg class="line" width="800" height="100">
-          <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-        </svg>          
-        <div class="bus-stop">Center Point</div>
-      </div>
-    </div>
-    <div class="grid-schdule">
-      <div class="arrival-time">
-        <img class="circle" src="/image/no-fill-circle.svg" >
-        <svg class="line" width="800" height="100">
-          <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
-        </svg>          
-        <div class="bus-stop">Center Point</div>
-      </div>
-    </div>
-    <div class="schedule-bottom">bottom</div>
-    </div>
-</div>  
-<button class="cancel-schedule-button js-cancel-schedule-button">Cancel</button>   
-`    
-  let busArrivalTime1=`
-  <div class="bus-time-table js-bus-time-table-1">  7:15am, 7:45am, 8:15am, 8:45am, 9:15am, No Service, 11:00am, 11:40am, 12:20pm, 1:00pm, 1:40pm, 2:20pm, No Service, 4:00pm, 4:40pm, 5:20pm, 6:00pm. 6:40pm</div>`
+    function showBusStop(matchingBus){
+      return busSchedule=`
+      <div class="schedule">
+          <div class="direct-route">${matchingBus.route}</div>
+          <div class="estimated-arrival-time js-estimated-1">Estimated arrival time at ${matchingBus.startingPoint1}:</div>
+          <div class="estimated-arrival-time js-estimated-2">Estimated arrival time at ${matchingBus.startingPoint2}:</div>
+          <div class="main-schedule">
+          <div class="grid-schdule">
+            <div class="arrival-time">
+              <img class="circle" src="/image/no-fill-circle.svg" >
+              <svg class="line" width="800" height="100">
+                <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
+              </svg>          
+              <div class="bus-stop">${matchingBus.busStop1}</div>
+            </div>
+          </div>
+          <div class="grid-schdule">
+            <div class="arrival-time">
+              <img class="circle" src="/image/no-fill-circle.svg" >
+              <svg class="line" width="800" height="100">
+                <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
+              </svg>          
+              <div class="bus-stop">${matchingBus.busStop2}</div>
+            </div>
+          </div>
+          <div class="grid-schdule">
+            <div class="arrival-time">
+              <img class="circle" src="/image/no-fill-circle.svg" >
+              <svg class="line" width="800" height="100">
+                <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
+              </svg>          
+              <div class="bus-stop">${matchingBus.busStop3}</div>
+            </div>
+          </div>
+          <div class="grid-schdule">
+            <div class="arrival-time">
+              <img class="circle" src="/image/no-fill-circle.svg" >
+              <svg class="line" width="800" height="100">
+                <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
+              </svg>          
+              <div class="bus-stop">${matchingBus.busStop4}</div>
+            </div>
+          </div>
+          <div class="grid-schdule">
+            <div class="arrival-time">
+              <img class="circle" src="/image/no-fill-circle.svg" >
+              <svg class="line" width="800" height="100">
+                <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
+              </svg>          
+              <div class="bus-stop">${matchingBus.busStop5}</div>
+            </div>
+          </div>
+          <div class="grid-schdule">
+            <div class="arrival-time">
+              <img class="circle" src="/image/no-fill-circle.svg" >
+              <svg class="line" width="800" height="100">
+                <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
+              </svg>          
+              <div class="bus-stop">${matchingBus.busStop6}</div>
+            </div>
+          </div>
+          <div class="grid-schdule">
+            <div class="arrival-time">
+              <img class="circle" src="/image/no-fill-circle.svg" >
+              <svg class="line" width="800" height="100">
+                <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
+              </svg>          
+              <div class="bus-stop">${matchingBus.busStop7}</div>
+            </div>
+          </div>
+          <div class="grid-schdule">
+            <div class="arrival-time">
+              <img class="circle" src="/image/no-fill-circle.svg" >
+              <svg class="line" width="800" height="100">
+                <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
+              </svg>          
+              <div class="bus-stop">${matchingBus.busStop8}</div>
+            </div>
+          </div>
+          <div class="schedule-bottom">bottom</div>
+          </div>
+      </div>  
+      <button class="cancel-schedule-button js-cancel-schedule-button">Cancel</button>   
+      `    
+    }
 
-  let busArrivalTime2=`  <div class="bus-7:30am, 8:00am, 8:30am, 9:00am, 9:30am, No Service, 11:20am, 12:00pm, 12:40pm, 1:20pm, 2:00pm, 2:40pm, No Service, 3:40pm, 4:20pm, 5:00pm, 5:40pm. 6:20pm 7:00pm</div>`
+    function showArrivalTime1(matchingBus){
+    return busArrivalTime1=`
+    <div class=" js-bus-time-table-1">${matchingBus.point1Time}</div>`
+    }
+    
+    function showArrivalTime2(matchingBus){
+     return busArrivalTime2=`<div class="bus-time-table js-bus-time-table-2">${matchingBus.point2Time}</div>`
+    }
+  
 
   isLocationVisible=openClose
 
@@ -124,29 +133,80 @@ export function showBusRoute(openClose=isLocationVisible){
       })
 
 
-      document.querySelector(`.js-bus-A1`).addEventListener('click',()=>{
-        location.innerHTML=``
-        document.querySelector('.js-dropout-location').innerHTML=busSchedule;
+      document.querySelectorAll(`.js-bus`).forEach((button)=>{
+        button.addEventListener('click',(event)=>{
+          const busId = event.currentTarget.dataset.busId;
+          let matchingBus=``;
+          
+          schedule.forEach((schdules)=>{
+            if(busId===schdules.id){
+              matchingBus=schdules;
+            }
+          })
   
-        
-          function cancelSchdule(){
-          document.querySelector('.js-cancel-schedule-button').addEventListener('click',()=>{
-            console.log('cancel-button was clicked')
-            location.innerHTML=``
-            console.log('tab was closed')
-          })}
-        
-        cancelSchdule();
-        document.querySelector('.js-estimated-1').addEventListener('click',()=>{
-          location.innerHTML=busSchedule+busArrivalTime1
+          let busStop=showBusStop(matchingBus);
+          let arrivalTime1=showArrivalTime1(matchingBus);
+          let arrivalTime2=showArrivalTime2(matchingBus);
+  
+          location.innerHTML=``
+          location.innerHTML=busStop;
+          console.log(`this is the the bus id: ${busId}`)
+          
+            function cancelSchdule(){
+            document.querySelector('.js-cancel-schedule-button').addEventListener('click',()=>{
+              console.log('cancel-button was clicked')
+              location.innerHTML=``
+              console.log('tab was closed')
+            })}
+          
           cancelSchdule();
-        })
-  
-        document.querySelector('.js-estimated-2').addEventListener('click',()=>{
-          location.innerHTML=busSchedule+busArrivalTime1
-           cancelSchdule();
+
+          const estimated1 = document.querySelector('.js-estimated-1');
+          const estimated2 = document.querySelector('.js-estimated-2');
+      
+          let isTimetable1Visible = false;
+          let isTimetable2Visible = false;
+                    
+          function toggleTimeTable(isTimetable1Visible,isTimetable2Visible) {
+            if (isTimetable1Visible) {
+                location.innerHTML = busStop + arrivalTime1;
+                cancelSchdule();
+                console.log('bus stop 1');
+            } else if (isTimetable2Visible) {
+                location.innerHTML = busStop + arrivalTime2;
+                cancelSchdule();
+                console.log('bus stop 2');
+            } else {
+                location.innerHTML = ''; // Clear content if no tab is visible
+            }
+          }
+
+          estimated1.addEventListener('click', () => {
+            console.log('timetable 1 clicked');
+            console.log('isTimetable1Visible:', isTimetable1Visible);
+            console.log('isTimetable2Visible:', isTimetable2Visible);
+            
+            isTimetable1Visible = !isTimetable1Visible;
+            isTimetable2Visible = false;
+            toggleTimeTable(isTimetable1Visible,isTimetable2Visible);
+            console.log('isTimetable1Visible:', isTimetable1Visible);
+            console.log('isTimetable2Visible:', isTimetable2Visible);
+        });
+        
+        estimated2.addEventListener('click', () => {
+            console.log('timetable 2 clicked');
+            console.log('isTimetable1Visible:', isTimetable1Visible);
+            console.log('isTimetable2Visible:', isTimetable2Visible);
+            
+            isTimetable2Visible = !isTimetable2Visible;
+            isTimetable1Visible = false;
+            toggleTimeTable(isTimetable1Visible,isTimetable2Visible);
+        });
+
         })
       })
+      
+
 
       return true;
   }else if(isLocationVisible===false){
@@ -163,6 +223,5 @@ export function showBusRoute(openClose=isLocationVisible){
 /* location.js*/
 const clickElement=document.querySelector('.js-dropout-img');
 const placeElement=document.querySelector('.js-dropout-location')
-let isVisible = false;
 
 toogle(clickElement,placeElement,showBusRoute,showFeedback,showNews)

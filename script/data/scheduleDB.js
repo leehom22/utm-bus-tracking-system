@@ -228,7 +228,7 @@ export const schedule=[{
 },{
   id:'0015',
   name:'F2',
-  route:'A2: KP -CP-JLN AMAL- KP',
+  route:'F2:KTR -KTHO -KTDI -JLN AMAL -CP -KTR',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
   point1Time: '7:15am, 7:45am, 8:15am, 8:45am, 9:15am, 9:45am, No Service, 11:45am, 12:25pm, 1:05pm, 1:45pm, 2:25pm, No service, 4:35pm, 5:15pm, 5:55pm, No Service, 7:45pm, 8:15pm, No Service',
@@ -244,7 +244,7 @@ export const schedule=[{
 },{
   id:'0016',
   name:'G1',
-  route:'A2: KP -CP-JLN AMAL- KP',
+  route:'G1: KTR -N24 -SKT -P19 -CP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
   point1Time:'7:00am, 7:40am, 8:20am, 9:00am, 9:40am, No Service, 11:40am, 12:20pm, 1:00pm, 13:40pm, 2:20pm, No Service, 4:20pm, 5:00pm, 5:40pm, 6:20pm', 
@@ -260,7 +260,7 @@ export const schedule=[{
 },{
   id:'0017',
   name:'G2',
-  route:'A2: KP -CP-JLN AMAL- KP',
+  route:'G2: KTR -N24 -SKT -P19 -CP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
   point1Time: '7:10am, 7:50am, 8:30am, 9:10am, 9:50am, No Service, 11:50am, 12:30pm, 1:10pm, 1:50pm, 2:30pm, No Service, 4:30pm, 5:10pm, 5:50pm, 6:30pm',
@@ -276,7 +276,7 @@ export const schedule=[{
 },{
   id:'0018',
   name:'G3',
-  route:'A2: KP -CP-JLN AMAL- KP',
+  route:'G3: KTR -N24 -SKT -P19 -CP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
   point1Time: '7:20am, 8:00am, 8:40am, 9:20am, 10:00am, No Service, 12:00pm, 12:40pm, 1:20pm, 2:00pm, 2:40pm, No Service, 4:40pm, 5:20pm, 6:00pm, 6:40pm',
@@ -292,7 +292,7 @@ export const schedule=[{
 },{
   id:'0019',
   name:'H',
-  route:'A2: KP -CP-JLN AMAL- KP',
+  route:'H:JLN AMAL -V01 -CP',
   startingPoint1:'KP(U5)',
   startingPoint2:'CP',
   point1Time:'7:15am, 7:45am, 8:15am, 8:45am, 9:15am, 9:45AM, No Service, 11:20Pm, 12:00am, 12:40pm, 1:20pm, 2:00pm, No service, 4:00pm, 4:40pm, 5:20pm, 6:00pm', 

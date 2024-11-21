@@ -60,6 +60,36 @@
   width: 20px;
 }
 
+.star:hover{
+  cursor: pointer;
+}
+
+.star {
+  font-size: 10vh;
+  cursor: pointer;
+  color: rgb(149, 149, 149);
+}
+ 
+.one {
+  color: rgb(255, 0, 0);
+}
+ 
+.two {
+  color: rgb(255, 106, 0);
+}
+ 
+.three {
+  color: rgb(251, 255, 120);
+}
+ 
+.four {
+  color: rgb(255, 255, 0);
+}
+ 
+.five {
+  color: rgb(24, 159, 14);
+}
+
 .grid-comment-feedback{
   display: flex;
   flex-direction: column;

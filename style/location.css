@@ -48,6 +48,7 @@
   margin-bottom: 10px;
   padding-bottom: 5px;
   padding-top: 5px;
+  border: none;
 }
 
 .bus-route:hover{
@@ -71,6 +72,7 @@
 .title-bus{
   width: 170px;
   margin-left: 70px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .cancel-route{
   width: 30px;
@@ -94,14 +96,14 @@ cursor: pointer;
 
 
 .direct-route{
-  font-family: roboto;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   margin-top: 20px;
-  font-size: 20px;
-  text-decoration: underline;
+  font-size: 18px;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  text-align: center;
 }
 
 
@@ -163,7 +165,7 @@ cursor: pointer;
   text-decoration: underline ;
 }
 
-.bus-time-table{
+.bus-time-table, .js-bus-time-table-1, .js-bus-time-table-2{
   position: absolute;
   width: 400px;
   background-color: #eeeeed;
