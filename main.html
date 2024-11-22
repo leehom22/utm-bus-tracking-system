@@ -65,27 +65,55 @@ c
 <script type="module" src="/script/maps.js"></script>
 
 <script 
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8&loading=async&callback=initMap"
-    async>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8">
 </script>
 
-<script>
+<script>let latitude = 1.559924320502762;
+  let longitude = 103.63481826803871;
+  
+  const locations = [{
+    title: "Center Point",
+    latitude: 1.559924320502762,
+    longitude: 103.63481826803871
+  }, {
+    title: "KTR K01",
+    latitude: 1.5622466469152858,
+    longitude: 103.62836869317545
+  }];
+  
   let map;
-  let latitude=1.559924320502762;
-  let longtitude=103.63481826803871;
+  
+  async function initMap() {
+    let position = { lat: latitude, lng: longitude };
+    // Request needed library
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  
+    // The map centered at the location
+    map = new Map(document.getElementById("map"), {
+      zoom: 18,
+      center: position,
+      mapId: "DEMO_MAP_ID",
+    });
+  
+    locations.forEach((location) => {
+      // The marker position at the location
+      position = { lat: location.latitude, lng: location.longitude };
+  
+      let marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: location.title,
+      });
+      console.log(position);
+    });
+  }
+  
+  initMap();
 
-async function initMap() {
-  const { Map } = await google.maps.importLibrary("maps");
 
-  map = new Map(document.getElementById("map"), {
-    center: { lat: latitude, lng: longtitude },
-    zoom: 8,
-  });
-}
-/*
-1.559924320502762, 103.63481826803871
-*/
 
-initMap();
+
+
 </script>
 </html>

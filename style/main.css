@@ -41,20 +41,15 @@ body{
   
   #map{
     position: absolute;
-    width: auto;
-    height: auto;
+    width: 1500px;
+    height: 600px;
     bottom: 0;
     right: 0;
     left: 100px;
     top: 100px;    
   }
 
-  .map{
-    position: absolute;
-    width: 1620px;
-    z-index: -1;
-    top: 0;
-  }
+
 
   .map-route{
     position:absolute;
