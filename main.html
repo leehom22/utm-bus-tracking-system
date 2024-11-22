@@ -40,10 +40,6 @@ c
       </div>
     </div>
 
-    <div id="map" >
- 
-    </div>
-
       <div class="js-dropout-location">
         <!--bus-route will show here-->
       </div>    
@@ -57,6 +53,11 @@ c
       <!--feedback show here-->
     </div>
 
+    <div id="floating-panel" ></div>
+
+    <div id="map"></div>
+
+
 </body>
 <script type="module" src="/script/main.js"></script>
 <script type="module" src="/script/location.js"> </script>
@@ -65,7 +66,7 @@ c
 <script type="module" src="/script/maps.js"></script>
 
 <script 
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8">
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8" >
 </script>
 
 <script>let latitude = 1.559924320502762;
@@ -81,20 +82,28 @@ c
     longitude: 103.62836869317545
   }];
   
+
+
   let map;
   
-  async function initMap() {
+  async function initMap() { //Direction: Same in different mode
     let position = { lat: latitude, lng: longitude };
+    //Direction API 
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRenderer = new google.maps.DirectionsRenderer(); //handles display of the polyline and any associated marker Display direction result
+
+    var centerPoint=new google.maps.LatLng(1.559924320502762,103.63481826803871)
+    var KTRK01 =new google.maps.LatLng(1.5622466469152858,103.62836869317545)
+
     // Request needed library
-    const { Map } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-  
-    // The map centered at the location
-    map = new Map(document.getElementById("map"), {
-      zoom: 18,
-      center: position,
-      mapId: "DEMO_MAP_ID",
+    const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 18,
+    center: position,
+    mapId: "DEMO_MAP_ID",
     });
+      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    directionsRenderer.setMap(map); //Bind with map 
+
   
     locations.forEach((location) => {
       // The marker position at the location
@@ -107,8 +116,23 @@ c
       });
       console.log(position);
     });
+
+    calcRoute(directionsService,directionsRenderer,centerPoint,origin)
   }
   
+  function calcRoute(directionsService,directionsRenderer,origin,destination,){
+    var request={
+      origin: {lat:1.559924320502762,lng:103.63481826803871},
+      destination:{lat:1.5622466469152858,lng:103.62836869317545},
+      travelMode:'DRIVING'
+    };
+    directionsService.route(request,function(result,status){
+      if(status=='OK'){
+        directionsRenderer.setDirections(result);
+      }
+    })
+  }
+  console.log(calcRoute)
   initMap();
 
 
