@@ -69,38 +69,44 @@ c
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8" >
 </script>
 
-<script>let latitude = 1.559924320502762;
-  let longitude = 103.63481826803871;
+<script>
   
+  let slatitude =1.5756014884596912;
+  let slongitude =103.61969835550295;
+  let elatitude=1.5597053379189187;
+  let elongitude=103.6348250402862;
+  
+  var start=new google.maps.LatLng(slatitude,slongitude)
+  var end =new google.maps.LatLng( elatitude,elongitude ) 
+
   const locations = [{
-    title: "Center Point",
-    latitude: 1.559924320502762,
-    longitude: 103.63481826803871
+    title: "K9/K10",
+    latitude: slatitude,
+    longitude: slongitude
   }, {
-    title: "KTR K01",
-    latitude: 1.5622466469152858,
-    longitude: 103.62836869317545
+    title: "CENTER POINT",
+    latitude: elatitude,
+    longitude: elongitude
   }];
   
-
-
   let map;
   
   async function initMap() { //Direction: Same in different mode
-    let position = { lat: latitude, lng: longitude };
-    //Direction API 
-    var directionsService = new google.maps.DirectionsService();
-    var directionsRenderer = new google.maps.DirectionsRenderer(); //handles display of the polyline and any associated marker Display direction result
-
-    var centerPoint=new google.maps.LatLng(1.559924320502762,103.63481826803871)
-    var KTRK01 =new google.maps.LatLng(1.5622466469152858,103.62836869317545)
-
-    // Request needed library
+    let position = start;
     const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 18,
     center: position,
     mapId: "DEMO_MAP_ID",
     });
+    //Direction API 
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRenderer = new google.maps.DirectionsRenderer({
+      draggable:true,
+      map,
+    }); //handles display of the polyline and any associated marker Display direction result
+
+    // Request needed library
+
       const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     directionsRenderer.setMap(map); //Bind with map 
 
@@ -116,14 +122,78 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hc
       });
       console.log(position);
     });
+    calculateAndDisplayRoute(directionsService, directionsRenderer);
 
-    calcRoute(directionsService,directionsRenderer,centerPoint,origin)
+    /*
+    calcRoute(directionsService,directionsRenderer,centerPoint,KTRK01)
+    */
   }
   
+  
+function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+//calculate distance and show polyline 
+
+  const waypts = [];
+  const checkboxArray =
+[
+{lat:1.5755369107882171,  lng:103.61978198903313}, 
+{lat:1.5738869823327488, lng:103.62008161447446},
+{lat:1.574105619212791, lng:103.62035392737016},
+{lat:1.5592650893575812, lng:103.63492441361308},
+{lat:1.5575301665271604, lng:103.6369383058712},//
+{lat:1.5626960658379052, lng:103.63902605006561},
+{lat:1.5587234616453303, lng:103.64051450548558 },
+{lat:1.5543378933405396, lng:103.64317898913},
+{lat:1.56345827426988, lng:103.65329441049309},
+{lat:1.5645563622408707, lng:103.65255143466082},
+{lat:1.5564975497000193, lng:103.64900532694843},
+{lat:1.5576309210728447, lng:103.64591305477848},
+{lat:1.5565735668061826, lng:103.6425405931917},
+];
+
+  for (let i = 0; i < checkboxArray.length; i++) {
+      waypts.push({
+        location: checkboxArray[i],
+        stopover: false,
+      });
+    
+  }
+
+  directionsService
+    .route({
+      origin: start,
+      destination: end,
+      waypoints: waypts,
+      optimizeWaypoints: false,
+      travelMode: google.maps.TravelMode.DRIVING,
+    })
+    .then((response) => {
+      directionsRenderer.setDirections(response);
+
+      const route = response.routes[0];
+      const summaryPanel = '';
+
+      summaryPanel.innerHTML = "";
+
+      // For each route, display summary information.
+      for (let i = 0; i < route.legs.length; i++) {
+        const routeSegment = i + 1;
+
+        summaryPanel.innerHTML +=
+          "<b>Route Segment: " + routeSegment + "</b><br>";
+        summaryPanel.innerHTML += route.legs[i].start_address + " to ";
+        summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
+        summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
+      }
+    })
+    .catch((e) => window.alert("Directions request failed due to " + status));
+}
+  /*
+    //Direction API to calculate and show route 
   function calcRoute(directionsService,directionsRenderer,origin,destination,){
     var request={
-      origin: {lat:1.559924320502762,lng:103.63481826803871},
-      destination:{lat:1.5622466469152858,lng:103.62836869317545},
+      origin: origin,
+      destination:destination,
       travelMode:'DRIVING'
     };
     directionsService.route(request,function(result,status){
@@ -133,6 +203,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hc
     })
   }
   console.log(calcRoute)
+  */
+
   initMap();
 
 

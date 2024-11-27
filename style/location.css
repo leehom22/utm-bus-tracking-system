@@ -30,7 +30,7 @@
   flex-direction: column;
   width: 200px;
   background-color: #eeeeed;
-
+  z-index: 1;
   
 }
 
@@ -49,6 +49,8 @@
   padding-bottom: 5px;
   padding-top: 5px;
   border: none;
+  z-index: 1;
+
 }
 
 .bus-route:hover{
@@ -92,6 +94,8 @@ cursor: pointer;
   bottom: 0;
   width: 320px;
   height: 1000px;
+  z-index: 1;
+
 }
 
 
@@ -120,6 +124,7 @@ cursor: pointer;
   justify-content: center;
   margin-top: 20px;
   padding: 10px;
+  z-index: 1;
 
 }
 
@@ -176,6 +181,8 @@ cursor: pointer;
   letter-spacing: 1px;
   line-height: 1.2;
   margin-top: 10px;
+  z-index: 1;
+
   
 }
 
