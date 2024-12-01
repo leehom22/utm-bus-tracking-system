@@ -2,7 +2,9 @@ import { showNews } from "./news.js";
 import { showFeedback } from "./feedback.js";
 import { toogle } from "./main.js";
 import { schedule } from "./data/scheduleDB.js";
+import { dynamicMap,initMap } from "./maps.js";
 let isLocationVisible=false;
+
 
 export function showBusRoute(openClose=isLocationVisible){
   const mainRoute=` 
@@ -17,7 +19,6 @@ export function showBusRoute(openClose=isLocationVisible){
     let busSchedule=``
     let busArrivalTime1=``;
     let busArrivalTime2=``;
-
 
     schedule.forEach((schdules)=>{ /*forEach() */
       route+=`
@@ -147,7 +148,15 @@ export function showBusRoute(openClose=isLocationVisible){
           let busStop=showBusStop(matchingBus);
           let arrivalTime1=showArrivalTime1(matchingBus);
           let arrivalTime2=showArrivalTime2(matchingBus);
-  
+
+          
+          initMap(false)//open plain map 
+
+
+           dynamicMap(matchingBus,true);
+          console.log(map)
+           
+
           location.innerHTML=``
           location.innerHTML=busStop;
           console.log(`this is the the bus id: ${busId}`)
@@ -156,6 +165,7 @@ export function showBusRoute(openClose=isLocationVisible){
             document.querySelector('.js-cancel-schedule-button').addEventListener('click',()=>{
               console.log('cancel-button was clicked')
               location.innerHTML=``
+              initMap(true)
               console.log('tab was closed')
             })}
           

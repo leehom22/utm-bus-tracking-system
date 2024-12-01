@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style/style.css">
+  <link rel="stylesheet" href="/style/location.css">
+  <link rel="stylesheet" href="/style/feedback.css">
+  <link rel="stylesheet" href="/style/news.css">
+  <title>Precisely</title>
+</head>
+<body>
+    <div class="top">
+      <div class="top-left">
+        <div class="web-name">Precisely</div>
+        <img class="logo" src="/image/logo.svg" alt="logo">
+      </div>
+      <div class="top-right">
+        <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 2C6.03125 2 2 6.03125 2 11C2 15.9688 6.03125 20 11 20C13.2109 20 15.2109 19.2109 16.75 17.9062L20.7188 21.875C21.0938 22.25 21.7188 22.25 22.0938 21.875C22.4688 21.5 22.4688 20.875 22.0938 20.5L18.125 16.5312C19.4062 15 20.1875 13 20.1875 11C20.1875 6.03125 16.1562 2 11 2ZM4 11C4 7.14062 7.14062 4 11 4C14.8594 4 18 7.14062 18 11C18 14.8594 14.8594 18 11 18C7.14062 18 4 14.8594 4 11Z" fill="currentColor"/>
+        </svg>     
+        <input class="search-bar" type="text" placeholder="Search">
+      </div>
+    </div>
+
+    <div class="left"> 
+      <div class="grid js-dropout-img ">
+        <img class="icon" src="/image/bus-icon.svg" alt="Bus">
+        <div class="title">Location</div>
+      </div>
+      <div class="grid js-news-img">
+        <img class="icon" src="/image/news-icon.svg" alt="News">
+        <div class="title">News</div>
+      </div>
+      <div class="grid js-feedback-img">
+        <img class="icon" src="/image/feedback-icon.svg" alt="Feedback">
+        <div class="title">Feedback</div>   
+      </div>
+    </div>
+
+      <div class="js-dropout-location">
+        <!--bus-route will show here-->
+      </div>    
+    
+
+    <div class="js-news">
+      <!--news will show here-->
+    </div>
+
+    <div class="js-feedback">
+      <!--feedback show here-->
+    </div>
+
+    <div id="floating-panel" ></div>
+
+    <div id="summary-panel"></div>
+
+    <div id="map"></div>
+
+
+</body>
+<script type="module" src="/script/maps.js"></script>
+<script type="module" src="/script/main.js"></script>
+<script type="module" src="/script/location.js"> </script>
+<script type="module" src="/script/news.js"></script>
+<script type="module" src="/script/feedback.js"></script>
+<script type="module" src="/script/firestore.js"></script>
+
+<script 
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8" >
+</script>
+
+<script>
+
+  
+</script>
+
+</html>
