@@ -2,7 +2,17 @@ const APIKEY="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiN
 
 let map;
 
-export function dynamicMap(bus,openClose){
+export function GoogleMap(position,zoom){
+  return map = new google.maps.Map(document.getElementById("map"), {
+    zoom: zoom,
+    center: position,
+    mapId: "DEMO_MAP_ID",
+    });
+}
+
+
+
+export function dynamicMap(bus,openClose){ //show bus route 
 
   let slatitude =bus.slat;
   let slongitude =bus.slong;
@@ -25,22 +35,20 @@ export function dynamicMap(bus,openClose){
   if(openClose===true){
     async function initMap() { //Direction: Same in different mode
       let position = start;
-       map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 18,
-      center: position,
-      mapId: "DEMO_MAP_ID",
-      });
+
+      GoogleMap(position,18) 
+      map=GoogleMap(position,18);
+  
       //Direction API 
       var directionsService = new google.maps.DirectionsService();
       var directionsRenderer = new google.maps.DirectionsRenderer({
-        draggable:true,
+        draggable:false,
         map,
       }); //handles display of the polyline and any associated marker Display direction result
     
-      // Request needed library
-    
-        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
       directionsRenderer.setMap(map); //Bind with map 
+
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     
     
       locations.forEach((location) => {
@@ -120,41 +128,7 @@ export function dynamicMap(bus,openClose){
 
 }
 
-/**
- export function plainMap(openClose){
-  if(openClose===true){
-    async function oriMap(){
-      let slatitude =1.5597118329440098;
-      let slongitude =103.63484846806988 ;
-      const position=new google.maps.LatLng(slatitude,slongitude)
-    //lat:1.5597118329440098,  lng:103.63484846806988 
-       map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 18,
-        center: position,
-        mapId: "DEMO_MAP_ID",
-        });
-    
-        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-    
-        let marker = new AdvancedMarkerElement({
-          map: map,
-          position: position,
-          title: location.title,
-        });   
-        marker
-    }
-    oriMap();
-  }
-  if(openClose===false){
-    map='';
-  }
-}
-plainMap(true)//open plain map 
- */
-
-
-
-export function initMap(openClose){
+export function initMap(openClose){ //show current location marker (fixed) 
 
 if(openClose===true){
 
@@ -168,17 +142,15 @@ async function initializeMap() {
         };
 
         // Initialize the map with the correct center
-        map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 18,
-          center: pos, // Use the correct pos object here
-          mapId: "DEMO_MAP_ID",
-        });
+        GoogleMap(pos,18);
+
+        // Request needed library)
 
         const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
         // Create and place the marker
         let marker = new AdvancedMarkerElement({
-          map: map,
+          map:  GoogleMap(pos,18),
           position: pos, // Use the calculated position
           title: "Current Location",
         });
@@ -187,6 +159,7 @@ async function initializeMap() {
         marker.setMap(map);
         map.setCenter(pos); // Center the map correctly
         map.setZoom(18);
+
       },
       (error) => {
         console.error("Error getting current position:", error);

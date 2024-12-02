@@ -18,7 +18,7 @@ export function showFeedback(openClose=isFeedbackVisible) {
      let feedback = `
   
     <div class="feedback">
-      <img class="feedback-cancel js-feedback-cancel" src="/image/cancel-feedback.svg">
+      <img class="feedback-cancel js-feedback-cancel" src="./image/cancel-feedback.svg">
       <div class="grid-feedback">
         <div class="instruction">Please rate your experience with this website</div>
         <div class="div-star">
@@ -107,7 +107,7 @@ stars.forEach((star)=>{
             const submitComment=`
             <div class="feedback">
       
-            <img class="feedback-cancel-last js-feedback-cancel" src="/image/cancel-feedback.svg">   
+            <img class="feedback-cancel-last js-feedback-cancel" src="./image/cancel-feedback.svg">   
             <div class="thanks-submit">Thanks for your feedback </div>
   
             </div>

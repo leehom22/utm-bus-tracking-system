@@ -3,10 +3,14 @@ import { showFeedback } from "./feedback.js";
 import { toogle } from "./main.js";
 import { schedule } from "./data/scheduleDB.js";
 import { dynamicMap,initMap } from "./maps.js";
+import { currentLocation } from "./firestore.js";
 let isLocationVisible=false;
 
 
 export function showBusRoute(openClose=isLocationVisible){
+
+  currentLocation(false);
+  
   const mainRoute=` 
       <div class="grid-title">
       <div class="title-bus">Bus</div>
@@ -108,7 +112,8 @@ export function showBusRoute(openClose=isLocationVisible){
           <div class="schedule-bottom">bottom</div>
           </div>
       </div>  
-      <button class="cancel-schedule-button js-cancel-schedule-button">Cancel</button>   
+      <button class="cancel-schedule-button js-cancel-schedule-button">Cancel</button>  
+      <button class="js-bus-location bus-location">Bus Location</button> 
       `    
     }
 
@@ -151,7 +156,7 @@ export function showBusRoute(openClose=isLocationVisible){
 
           
           initMap(false)//open plain map 
-
+          //currentLocation(false) //open tracking bus location 
 
            dynamicMap(matchingBus,true);
           console.log(map)
@@ -160,12 +165,19 @@ export function showBusRoute(openClose=isLocationVisible){
           location.innerHTML=``
           location.innerHTML=busStop;
           console.log(`this is the the bus id: ${busId}`)
+
+          document.querySelector('.js-bus-location').addEventListener('click',()=>{
+            initMap(false)
+            currentLocation(true)
+          })
           
             function cancelSchdule(){
             document.querySelector('.js-cancel-schedule-button').addEventListener('click',()=>{
               console.log('cancel-button was clicked')
               location.innerHTML=``
               initMap(true)
+              currentLocation(false)
+              dynamicMap(matchingBus,false)
               console.log('tab was closed')
             })}
           

@@ -12,7 +12,7 @@ export function showNews(openClose=isNewsVisible) {
     <div class="news">
       <div class="news-header">
         What's Happening
-      <img class="news-cancel js-cancel-news" src="/image/x-cancel.svg" alt="cancel">
+      <img class="news-cancel js-cancel-news" src="./image/x-cancel.svg" alt="cancel">
       </div>
       <div class="main-grid-news">
        
