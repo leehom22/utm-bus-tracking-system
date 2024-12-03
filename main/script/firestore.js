@@ -3,6 +3,7 @@ import { getFirestore, collection, addDoc,getDoc,doc,setDoc,updateDoc, serverTim
 //import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { getAuth} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { GoogleMap } from "./maps.js";
+import { initMap } from "./maps.js";
 
 //setLogLevel("debug");
   const firebaseConfig = {
@@ -48,79 +49,120 @@ let dynamicCurrentLocation=``;
 
 let map;
 // Declare watchID outside the function scope to persist across calls
-let watchID = null; 
+let watchID = null; // To store the watchPosition ID
+let marker = null; // To store the marker instance
+let updateInterval = null; // To store the interval ID for manual refresh
+let firestoreData=null;
+const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
 
 export function currentLocation(openClose) {
+ 
+  
+
   if (openClose === true) {
-    if (watchID !== null) {
-      console.log("Already watching position.");
-      return; // Prevent multiple watchPosition calls if already active
-    }
-    function showPosition(position) {
-      return position;
-    }
-    let currentLocation=navigator.geolocation.getCurrentPosition(showPosition)
-    GoogleMap(currentLocation,17);
 
-setInterval(() => {
-      // Function to handle location updates
-      async function handlePosition(position) {
-        try {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-  
-          dynamicCurrentLocation = pos;
-          console.log(`Latitude: ${pos.lat}, Longitude: ${pos.lng}`);
-  
-          // Update Firestore
-          //const locationRef = doc(db, 'location', 'currentLocation');
-          //await setDoc(locationRef, pos);
-  
-          //const locationData = await getDoc(locationRef);
-          //console.log('User Current Position from Firestore: ', locationData.data());
-  
-          // Update map with current location
-          async function location() {
-            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-  
-            let marker = new AdvancedMarkerElement({
-              map: GoogleMap(dynamicCurrentLocation,17),
-              position: dynamicCurrentLocation,
-              content: busSvg,
-              title: "Current Location",
-            });
-          }
-          location();
-        } catch (error) {
-          console.error('Error updating Firestore or map: ', error);
-        }
+    if (watchID !== null || updateInterval !== null) {
+      console.log("Already watching position or interval is active.");
+      return; // Prevent multiple calls if already active
+    }
+
+    async function initializeMap(position) {
+      const map = GoogleMap(position, 17); // Initialize or reuse the map
+
+      if (!marker) {
+        // Create the marker only once
+        marker = new AdvancedMarkerElement({
+          map: map,
+          position: position,
+          title: location.title,
+          content: busSvg,
+        });
       }
-  
-      // Start watching position
-      watchID = navigator.geolocation.watchPosition(
-        handlePosition,
-        (error) => {
-          console.error(`Error watching position: ${error.message}`);
-        },
-        {
-          enableHighAccuracy: true,
-          maximumAge: 0,
-        }
-      );
-}, 5000);
+    }
 
-    console.log("Started watching position.");
+    function updateMarkerPosition(position) {
+      const pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+
+      dynamicCurrentLocation = pos;
+      console.log(`Latitude: ${pos.lat}, Longitude: ${pos.lng}`);
+
+      if (!map) {
+        // Initialize the map and marker on the first position update
+        initializeMap(pos);
+        console.log('initialize Map')
+      } else {
+        // Update the marker's position without refreshing the map
+        marker.setPosition(pos);
+        console.log('Set map to new location')
+      }
+    }
+
+    // Start watching position
+    watchID = 
+      navigator.geolocation.watchPosition(
+      updateMarkerPosition,
+      (error) => {
+        console.error(`Error watching position: ${error.message}`);
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+      }
+    );
+
+    // Start a periodic log update using setInterval
+    updateInterval =  setInterval(async() => {
+      if (dynamicCurrentLocation) {
+        console.log(
+          "Current dynamic location (via interval):",
+          dynamicCurrentLocation
+        );
+        console.log('This is from dynamicCurrenPosition',dynamicCurrentLocation)
+        if (marker){
+          marker.position={lat:dynamicCurrentLocation.lat,lng:dynamicCurrentLocation.lng};
+          marker.content=busSvg;
+        }
+        
+        //store location
+        const locationRef=await addDoc(collection(db,'location'),dynamicCurrentLocation)
+        //get location
+        
+          const docRef = doc(db, "location", locationRef.id);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            console.log("Document data: ", docSnap.data());
+            firestoreData=docSnap.data();
+            console.log('firestoreData: ',firestoreData)
+          } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+          }
+         
+      } else {
+        console.log("No location data yet.");
+      }
+    }, 5000); // Log current position every 5 seconds
+
+    console.log("Started watching position and interval updates.");
   } else if (openClose === false) {
-    // Stop watching position
+    // Stop watching position and clear interval
     if (watchID !== null) {
       navigator.geolocation.clearWatch(watchID);
+      watchID = null; // Reset watchID
       console.log("Stopped watching position.");
-      watchID = null; // Reset watchID to null
-    } else {
-      console.log("No active position watcher to stop.");
     }
+
+    if (updateInterval !== null) {
+      clearInterval(updateInterval);
+      updateInterval = null; // Reset interval ID
+      console.log("Stopped interval updates.");
+    }
+    initMap(true)
   }
 }
 

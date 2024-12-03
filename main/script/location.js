@@ -9,7 +9,6 @@ let isLocationVisible=false;
 
 export function showBusRoute(openClose=isLocationVisible){
 
-  currentLocation(false);
   
   const mainRoute=` 
       <div class="grid-title">
@@ -247,3 +246,9 @@ const clickElement=document.querySelector('.js-dropout-img');
 const placeElement=document.querySelector('.js-dropout-location')
 
 toogle(clickElement,placeElement,showBusRoute,showFeedback,showNews)
+
+/*
+function marker(position){
+
+}
+*/

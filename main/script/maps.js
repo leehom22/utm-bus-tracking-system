@@ -3,11 +3,17 @@ const APIKEY="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiN
 let map;
 
 export function GoogleMap(position,zoom){
-  return map = new google.maps.Map(document.getElementById("map"), {
-    zoom: zoom,
-    center: position,
-    mapId: "DEMO_MAP_ID",
-    });
+  if(!map){
+     map = new google.maps.Map(document.getElementById("map"), {
+      zoom: zoom,
+      center: position,
+      mapId: "DEMO_MAP_ID",
+      });
+  }else{
+    map.setCenter(position);
+    map.setZoom(zoom);
+  }
+return map
 }
 
 
@@ -133,6 +139,7 @@ export function initMap(openClose){ //show current location marker (fixed)
 if(openClose===true){
 
 async function initializeMap() {
+  
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
