@@ -1,9 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore, collection, addDoc,getDoc,doc,setDoc,updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc,getDoc,doc,setDoc,updateDoc, serverTimestamp,query,orderBy,limit,getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 //import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { getAuth} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { GoogleMap } from "./maps.js";
 import { initMap } from "./maps.js";
+import { getDistance, checkProximity, updateIndicatorColor, updateMarkerPosition } from "./distance.js";
+import { busStop_G } from "./data/scheduleDB.js";
 
 //setLogLevel("debug");
   const firebaseConfig = {
@@ -46,20 +48,18 @@ const busSvg=parser.parseFromString(
 
 
 let dynamicCurrentLocation=``;
-
 let map;
 // Declare watchID outside the function scope to persist across calls
 let watchID = null; // To store the watchPosition ID
 let marker = null; // To store the marker instance
 let updateInterval = null; // To store the interval ID for manual refresh
 let firestoreData=null;
+let locationData=null
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
 
-export function currentLocation(openClose) {
+export async function currentLocation(openClose) {
  
-  
-
   if (openClose === true) {
 
     if (watchID !== null || updateInterval !== null) {
@@ -67,7 +67,7 @@ export function currentLocation(openClose) {
       return; // Prevent multiple calls if already active
     }
 
-    async function initializeMap(position) {
+    async function initializeMap(position) { //keep
       const map = GoogleMap(position, 17); // Initialize or reuse the map
 
       if (!marker) {
@@ -81,26 +81,29 @@ export function currentLocation(openClose) {
       }
     }
 
+    
     function updateMarkerPosition(position) {
+      /*
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-
-      dynamicCurrentLocation = pos;
-      console.log(`Latitude: ${pos.lat}, Longitude: ${pos.lng}`);
+      */
+      //dynamicCurrentLocation = pos;
+      //console.log(`Latitude: ${pos.lat}, Longitude: ${pos.lng}`);
 
       if (!map) {
         // Initialize the map and marker on the first position update
-        initializeMap(pos);
+        initializeMap(position);
         console.log('initialize Map')
       } else {
         // Update the marker's position without refreshing the map
-        marker.setPosition(pos);
+        marker.setPosition(position);
         console.log('Set map to new location')
       }
     }
-
+    
+    /*
     // Start watching position
     watchID = 
       navigator.geolocation.watchPosition(
@@ -113,24 +116,54 @@ export function currentLocation(openClose) {
         maximumAge: 0,
       }
     );
+    */
+
+    async function getLatestDataFromBusG1(db) {
+      // Reference to the 'BUS-G1' collection
+      const collectionRef = collection(db, "BUS-G1");
+    
+      try {
+        // Create a query to get the latest document based on a 'timestamp' field
+        const latestDocQuery = query(collectionRef, orderBy("timestamp", "desc"), limit(1));
+    
+        // Execute the query
+        const querySnapshot = await getDocs(latestDocQuery);
+    
+        querySnapshot.forEach((doc) => {
+          console.log(`Document ID: ${doc.id}`);
+          console.log(`Latest Data: ${JSON.stringify(doc.data())}`);
+          firestoreData=doc.data();
+          locationData=firestoreData.dynamicCurrentLocation
+
+        });
+      } catch (error) {
+        console.error("Error fetching latest document: ", error);
+      }
+    }
 
     // Start a periodic log update using setInterval
     updateInterval =  setInterval(async() => {
-      if (dynamicCurrentLocation) {
+      await getLatestDataFromBusG1(db);
+
+      if (firestoreData) {
         console.log(
-          "Current dynamic location (via interval):",
-          dynamicCurrentLocation
+          "Current dynamic location (from database):",
+          locationData
         );
-        console.log('This is from dynamicCurrenPosition',dynamicCurrentLocation)
+        updateMarkerPosition(locationData);
+
         if (marker){
-          marker.position={lat:dynamicCurrentLocation.lat,lng:dynamicCurrentLocation.lng};
+          marker.position=new google.maps.LatLng(locationData.lat,locationData.lng);
+          //marker.setPosition(newPosition);
           marker.content=busSvg;
         }
         
         //store location
-        const locationRef=await addDoc(collection(db,'location'),dynamicCurrentLocation)
+        //const locationRef=await addDoc(collection(db,'location'),dynamicCurrentLocation)
         //get location
-        
+
+        /*
+          const locationRef=await doc(db, "BUS-G1",)
           const docRef = doc(db, "location", locationRef.id);
           const docSnap = await getDoc(docRef);
 
@@ -138,11 +171,14 @@ export function currentLocation(openClose) {
             console.log("Document data: ", docSnap.data());
             firestoreData=docSnap.data();
             console.log('firestoreData: ',firestoreData)
+            triggerIndicator();
           } else {
             // docSnap.data() will be undefined in this case
             console.log("No such document!");
           }
-         
+         */
+          console.log("Latitude Type:", typeof locationData.lat);
+          console.log("Longitude Type:", typeof locationData.lng);
       } else {
         console.log("No location data yet.");
       }
@@ -150,13 +186,14 @@ export function currentLocation(openClose) {
 
     console.log("Started watching position and interval updates.");
   } else if (openClose === false) {
+    /*
     // Stop watching position and clear interval
     if (watchID !== null) {
       navigator.geolocation.clearWatch(watchID);
       watchID = null; // Reset watchID
       console.log("Stopped watching position.");
     }
-
+    */
     if (updateInterval !== null) {
       clearInterval(updateInterval);
       updateInterval = null; // Reset interval ID
@@ -167,3 +204,12 @@ export function currentLocation(openClose) {
 }
 
 currentLocation(false);
+
+function triggerIndicator(){
+  if(firestoreData){
+    checkProximity(firestoreData,busStop_G);
+    console.log('triggerIndicator execute')
+  }else{
+    console.log('no data')
+  }
+}

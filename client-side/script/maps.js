@@ -1,8 +1,11 @@
-const APIKEY="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8";
-
+const APIKEY="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8&loading=async&libraries=places&callback=initMap"
+import { search } from "./search.js";
 let map;
 
 export function GoogleMap(position,zoom){
+  if (!window.google || !google.maps) {
+    throw new Error("Google Maps API not loaded");
+  }
   if(!map){
      map = new google.maps.Map(document.getElementById("map"), {
       zoom: zoom,
@@ -139,7 +142,7 @@ export function initMap(openClose){ //show current location marker (fixed)
 if(openClose===true){
 
 async function initializeMap() {
-  
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -150,6 +153,7 @@ async function initializeMap() {
 
         // Initialize the map with the correct center
         GoogleMap(pos,18);
+        search(map)
 
         // Request needed library)
 
@@ -174,6 +178,8 @@ async function initializeMap() {
     );
   } else {
     console.error("Geolocation is not supported by this browser.");
+    search(map)
+
   }
 }
 initializeMap()
@@ -184,6 +190,5 @@ map='';
 }
 // Call the function
 initMap(true);
-
 
 

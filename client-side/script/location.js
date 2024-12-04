@@ -38,7 +38,7 @@ export function showBusRoute(openClose=isLocationVisible){
           <div class="main-schedule">
           <div class="grid-schdule">
             <div class="arrival-time">
-              <img class="circle" src="/image/no-fill-circle.svg" >
+              <img class="circle bus-stop-1"  src="/image/no-fill-circle.svg" >
               <svg class="line" width="800" height="100">
                 <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
               </svg>          
@@ -47,7 +47,7 @@ export function showBusRoute(openClose=isLocationVisible){
           </div>
           <div class="grid-schdule">
             <div class="arrival-time">
-              <img class="circle" src="/image/no-fill-circle.svg" >
+              <img class="circle bus-stop-2" src="/image/no-fill-circle.svg" >
               <svg class="line" width="800" height="100">
                 <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
               </svg>          
@@ -56,7 +56,7 @@ export function showBusRoute(openClose=isLocationVisible){
           </div>
           <div class="grid-schdule">
             <div class="arrival-time">
-              <img class="circle" src="/image/no-fill-circle.svg" >
+              <img class="circle bus-stop-3" src="/image/no-fill-circle.svg" >
               <svg class="line" width="800" height="100">
                 <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
               </svg>          
@@ -65,7 +65,7 @@ export function showBusRoute(openClose=isLocationVisible){
           </div>
           <div class="grid-schdule">
             <div class="arrival-time">
-              <img class="circle" src="/image/no-fill-circle.svg" >
+              <img class="circle bus-stop-4" src="/image/no-fill-circle.svg" >
               <svg class="line" width="800" height="100">
                 <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
               </svg>          
@@ -74,7 +74,7 @@ export function showBusRoute(openClose=isLocationVisible){
           </div>
           <div class="grid-schdule">
             <div class="arrival-time">
-              <img class="circle" src="/image/no-fill-circle.svg" >
+              <img class="circle bus-stop-5" src="/image/no-fill-circle.svg" >
               <svg class="line" width="800" height="100">
                 <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
               </svg>          
@@ -83,7 +83,7 @@ export function showBusRoute(openClose=isLocationVisible){
           </div>
           <div class="grid-schdule">
             <div class="arrival-time">
-              <img class="circle" src="/image/no-fill-circle.svg" >
+              <img class="circle bus-stop-6" src="/image/no-fill-circle.svg" >
               <svg class="line" width="800" height="100">
                 <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
               </svg>          
@@ -92,7 +92,7 @@ export function showBusRoute(openClose=isLocationVisible){
           </div>
           <div class="grid-schdule">
             <div class="arrival-time">
-              <img class="circle" src="/image/no-fill-circle.svg" >
+              <img class="circle bus-stop-7" src="/image/no-fill-circle.svg" >
               <svg class="line" width="800" height="100">
                 <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
               </svg>          
@@ -101,7 +101,7 @@ export function showBusRoute(openClose=isLocationVisible){
           </div>
           <div class="grid-schdule">
             <div class="arrival-time">
-              <img class="circle" src="/image/no-fill-circle.svg" >
+              <img class="circle bus-stop-8" src="/image/no-fill-circle.svg" >
               <svg class="line" width="800" height="100">
                 <line x1="0" y1="50" x2="800" y2="50" stroke="black" stroke-width="2" />
               </svg>          

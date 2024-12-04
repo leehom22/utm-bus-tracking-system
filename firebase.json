@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "main",
+    "public": "client-side",
 
     "ignore": [
       "firebase.json",
