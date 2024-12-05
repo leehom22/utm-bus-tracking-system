@@ -2,13 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
 import { getFirestore, collection, addDoc,serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCboB1zkwOfNWQkkRqi8l9A9HoNhMBHTgY",
-  authDomain: "lofty-chemist-442412-f9.firebaseapp.com",
-  projectId: "lofty-chemist-442412-f9",
-  storageBucket: "lofty-chemist-442412-f9.firebasestorage.app",
-  messagingSenderId: "672389647219",
-  appId: "1:672389647219:web:e87abeaa716428d9edd306",
-  measurementId: "G-BZYNWXRTY9"
+ //firebaseConfig
 };
 
 const app = initializeApp(firebaseConfig);
