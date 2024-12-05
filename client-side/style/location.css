@@ -8,17 +8,6 @@
   height: 100vh;
 }
 
-/*.dropout-location{
-  position: absolute;
-  top: 100px;
-  left: 100px;
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  height: 100vh;
-  background-color: #eeeeed;
-}
-*/
 .grid-route{
   margin-top: 45px;
   display: flex;
@@ -179,7 +168,8 @@ cursor: pointer;
   width: 400px;
   background-color: #eeeeed;
   padding: 20px;
-  left: 880px;
+  left: 980px;
+  top: 460px;
   border-radius: 10px;
   text-align: justify;
   letter-spacing: 1px;

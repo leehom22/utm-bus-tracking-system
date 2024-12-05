@@ -1,25 +1,30 @@
-const APIKEY="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8&loading=async&libraries=places&callback=initMap"
-import { search } from "./search.js";
+
 let map;
 
 export function GoogleMap(position,zoom){
+
   if (!window.google || !google.maps) {
     throw new Error("Google Maps API not loaded");
-  }
-  if(!map){
-     map = new google.maps.Map(document.getElementById("map"), {
-      zoom: zoom,
-      center: position,
-      mapId: "DEMO_MAP_ID",
-      });
   }else{
-    map.setCenter(position);
-    map.setZoom(zoom);
+    if(!map){
+      map =  new google.maps.Map(document.getElementById("map"), {
+       zoom: zoom,
+       center: position,
+       mapId: "DEMO_MAP_ID",
+       });
+   }else{
+     map.setCenter(position);
+
+ 
+     map.setZoom(zoom);
+   }
+   console.log(map.center)
   }
 return map
 }
 
-
+var start;
+var end;
 
 export function dynamicMap(bus,openClose){ //show bus route 
 
@@ -28,8 +33,8 @@ export function dynamicMap(bus,openClose){ //show bus route
   let elatitude=bus.elat;
   let elongitude=bus.elong;
   
-  var start=new google.maps.LatLng(slatitude,slongitude)
-  var end =new google.maps.LatLng( elatitude,elongitude ) 
+   start=new google.maps.LatLng(slatitude,slongitude)
+   end =new google.maps.LatLng( elatitude,elongitude ) 
   
   const locations = [{
     title: bus.startingPoint1,
@@ -47,11 +52,14 @@ export function dynamicMap(bus,openClose){ //show bus route
 
       GoogleMap(position,18) 
       map=GoogleMap(position,18);
-  
+      if(!map){
+        console.log('map is undefined')
+      }
       //Direction API 
       var directionsService = new google.maps.DirectionsService();
       var directionsRenderer = new google.maps.DirectionsRenderer({
         draggable:false,
+        suppressMarkers: true, // Suppress default waypoint markers
         map,
       }); //handles display of the polyline and any associated marker Display direction result
     
@@ -151,10 +159,13 @@ async function initializeMap() {
           lng: position.coords.longitude,
         };
 
-        // Initialize the map with the correct center
-        GoogleMap(pos,18);
-        search(map)
 
+        // Initialize the map with the correct center
+        map=GoogleMap(pos,18);
+
+        if(!map){
+          console.log('map is undefined')
+        }
         // Request needed library)
 
         const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -170,7 +181,6 @@ async function initializeMap() {
         marker.setMap(map);
         map.setCenter(pos); // Center the map correctly
         map.setZoom(18);
-
       },
       (error) => {
         console.error("Error getting current position:", error);
@@ -178,7 +188,6 @@ async function initializeMap() {
     );
   } else {
     console.error("Geolocation is not supported by this browser.");
-    search(map)
 
   }
 }
@@ -189,6 +198,5 @@ map='';
 
 }
 // Call the function
-initMap(true);
-
+initMap();
 

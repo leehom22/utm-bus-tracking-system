@@ -1,7 +1,7 @@
 {
-  "hosting": {
-    "public": "client-side",
-
+  "hosting": [{
+    "site":"bus-side-tracker-7235d",
+    "public": "bus-side",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -13,17 +13,31 @@
         "destination": "/index.html"
       }
     ]
-  },
-    "headers": [
+  },{
+    "site":"lofty-chemist-442412-f9",
+    "public": "client-side",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
       {
-        "source": "**/*.svg",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "image/svg+xml"
-          }
-        ]
+        "source": "**",
+        "destination": "/index.html"
       }
     ]
+  }],
   
+  "headers": [
+    {
+      "source": "**/*.svg",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/svg+xml"
+        }
+      ]
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-
+const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 const input = document.getElementById("autocomplete");
 let autocomplete;
 let markers = []; // Move markers outside to avoid scope issues
@@ -14,110 +14,78 @@ const defaultBounds = {
   west: center.lng - 0.07,
 };
 
-// Function to initialize autocomplete and map
-export function initAutocomplete(map) {
+
+
+export function initAutocomplete() {
   console.log('Places API executed')
-  //const input = document.getElementById("autocomplete");
-  if (!input) {
-    console.error("Autocomplete input element not found.");
-    return;
-  }
-
-  // Initialize autocomplete with options
-  autocomplete = new google.maps.places.Autocomplete(input, {
+  
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 1.5597497526704713, lng: 103.6347404049601 },
+    zoom: 13,
+    mapTypeId: "roadmap",
+  });
+  
+  // Create the search box and link it to the UI element.
+  const input = document.getElementById("autocomplete");
+  const searchBox = new google.maps.places.SearchBox(input,{
     bounds: defaultBounds,
-    strictBounds: true,
-    componentRestrictions: { country: ["my"] },
-    fields: ["address_components", "geometry", "name", "icon"],
+    componentRestrictions: { country: "my" },
+
   });
 
 
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener("bounds_changed", () => {
+    searchBox.setBounds(map.getBounds());
+  });
 
-  // Add listener for place selection
-  autocomplete.addListener("place_changed", () => fillInAddress(map));
-}
+  let markers = [];
 
-// Function to handle place selection and fill in address
-async function fillInAddress(map) {
-  if(!autocomplete){
-    console.log('Places API not trigger')
-  }
-  const place = autocomplete.getPlace();
-  if (!place.geometry || !place.geometry.location) {
-    console.log("Returned place contains no geometry");
-    return;
-  }
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener("places_changed", () => {
+    const places = searchBox.getPlaces();
 
-  // Clear out old markers
-  markers.forEach((marker) => marker.setMap(null));
-  markers = [];
-
-  // Add a new marker for the selected place
-  if(map){
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-    const markerContent = document.createElement("div");
-  markerContent.innerHTML = `<img src="${place.icon}" alt="${place.name}" style="width:25px; height:25px;">`;
-
-    const icon = {
-      url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(25, 25),
-    };
-
-    let marker = new AdvancedMarkerElement({
-      map,
-      position: place.geometry.location,
-      //content:markerContent,
-      title: place.name,
-    });
-    markers.push(marker);
-  }else{
-    console.log('map is not initialized, marker cannot load   ')
-  }
-
-
-  // Adjust map bounds to fit the new place
-  const bounds = new google.maps.LatLngBounds();
-  if (place.geometry.viewport) {
-    bounds.union(place.geometry.viewport);
-  } else {
-    bounds.extend(place.geometry.location);
-  }
-  map.fitBounds(bounds);
-
-  // Fill the input field with the selected address
-  let address = "";
-  let postcode = "";
-
-  place.address_components.forEach((component) => {
-    const componentType = component.types[0];
-    switch (componentType) {
-      case "street_number":
-        address = `${component.long_name} ${address}`;
-        break;
-      case "route":
-        address += component.short_name;
-        break;
-      case "postal_code":
-        postcode = `${component.long_name}${postcode}`;
-        break;
+    if (places.length == 0) {
+      return;
     }
+
+    // Clear out the old markers.
+    markers.forEach((marker) => {
+      marker.setMap(null);
+    });
+    markers = [];
+
+    // For each place, get the icon, name and location.
+    const bounds = new google.maps.LatLngBounds();
+
+    places.forEach((place) => {
+      if (!place.geometry || !place.geometry.location) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+
+
+
+      // Create a marker for each place.
+      markers.push(
+        new google.maps.Marker({
+          map,
+          title: place.name,
+          position: place.geometry.location,
+        }),
+      );
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
   });
-
-  input.value = address;
 }
 
-export function search(map){
-// Initialize autocomplete after DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-  if (!map) {
-    console.error("Map is not initialized yet.");
-    return;
-  }
-  initAutocomplete(map);
-});
+window.initAutocomplete = initAutocomplete;
 
-}
+initAutocomplete()

@@ -4,6 +4,7 @@ import { toogle } from "./main.js";
 import { schedule } from "./data/scheduleDB.js";
 import { dynamicMap,initMap } from "./maps.js";
 import { currentLocation } from "./firestore.js";
+import { initAutocomplete } from "./search.js";
 let isLocationVisible=false;
 
 
@@ -118,11 +119,11 @@ export function showBusRoute(openClose=isLocationVisible){
 
     function showArrivalTime1(matchingBus){
     return busArrivalTime1=`
-    <div class=" js-bus-time-table-1">${matchingBus.point1Time}</div>`
+    <div class=" js-bus-time-table-1 ">${matchingBus.point1Time}</div>`
     }
     
     function showArrivalTime2(matchingBus){
-     return busArrivalTime2=`<div class="bus-time-table js-bus-time-table-2">${matchingBus.point2Time}</div>`
+     return busArrivalTime2=`<div class="bus-time-table js-bus-time-table-2 ">${matchingBus.point2Time}</div>`
     }
   
 
@@ -155,7 +156,6 @@ export function showBusRoute(openClose=isLocationVisible){
 
           
           initMap(false)//open plain map 
-          //currentLocation(false) //open tracking bus location 
 
            dynamicMap(matchingBus,true);
           console.log(map)
@@ -246,9 +246,12 @@ const clickElement=document.querySelector('.js-dropout-img');
 const placeElement=document.querySelector('.js-dropout-location')
 
 toogle(clickElement,placeElement,showBusRoute,showFeedback,showNews)
+initAutocomplete()
 
-/*
-function marker(position){
-
-}
-*/
+document.querySelector('.js-logo').addEventListener('click',()=>{
+  initMap()
+  currentLocation(false)
+  showBusRoute(false)
+  showFeedback(false)
+  showNews(false)
+})

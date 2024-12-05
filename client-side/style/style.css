@@ -11,7 +11,7 @@ body{
   flex-direction: row;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0px;
   height: 100px;
   margin: 0;
   z-index: 1;
@@ -23,6 +23,10 @@ body{
   margin: 0;
   }
 
+  .top-left:hover{
+    cursor: pointer;
+  }
+  
   .web-name{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -39,6 +43,10 @@ body{
 
   }
   
+  .logo:hover{
+    cursor: pointer;
+  }
+
   #map{
     position: absolute;
     width: 1500px;
@@ -89,6 +97,7 @@ body{
     background-color: rgba(191, 191, 191, 0.397);
     cursor: pointer;
   }
+
   .top-right{
   position: relative;
   display: flex;
@@ -97,11 +106,49 @@ body{
   height: 40px;
   width: 260px;
   margin-top: 20px;
-  height: 40px;
   width: 180px;
   margin-left: 970px;
+  z-index: 2;
+}
 
-  }
+
+
+#autocomplete{
+  position: absolute ;
+  background-color: #737373;
+  border: none;
+  top: 0;
+  height: 40px;
+  width: 300px;
+  border-radius: 20px;
+  margin-top: 5px;
+  margin-left: -80px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding-bottom: 3px;
+  z-index: 3;
+}
+
+input{
+  color: #d9d9d9;
+  font-size: 15px;
+  padding: 0;
+  padding-left: 40px;
+  padding-top: 3px;
+  padding-right: -10px;
+
+
+}
+input::placeholder{
+  color: rgb(182, 182, 182);
+  border: none;
+  font-size: 18px;
+  padding: 0;
+  padding: 15px;
+  padding-bottom: 10px;
+}
 
   .search-icon{
     position: absolute;
@@ -123,39 +170,7 @@ body{
   }
   
 
-#autocomplete{
-  position: absolute;
-  background-color: #737373;
-  border: none;
-  height: 40px;
-  width: 200px;
-  border-radius: 20px;
-  margin-top: 20px;
-  margin-left: 0px;
-  border: none;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  padding-bottom: 3px;
-  z-index: 3;
-}
 
-input{
-  color: #d9d9d9;
-  font-size: 20px;
-  padding: 0;
-  padding-left: 40px;
-  padding-top: 3px;
-  padding-right: -10px;
-
-
-}
-input::placeholder{
-  color: rgb(182, 182, 182);
-  border: none;
-  font-size: 20px;
-  padding: 0;
-}
 
 input:focus{
   border: none;

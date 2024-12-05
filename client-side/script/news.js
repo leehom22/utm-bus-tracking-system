@@ -51,9 +51,7 @@ export function showNews(openClose=isNewsVisible) {
     return false;
   }
   
-
 }
-
 
 /*News.js*/ 
 const clickElement=document.querySelector('.js-news-img');

@@ -12,17 +12,15 @@
   <title>Precisely</title>
 </head>
 <body>
+  <div id="map"></div>
+
     <div class="top">
-      <div class="top-left">
-        <div class="web-name">Precisely</div>
-        <img class="logo" src="./image/logo.svg" alt="logo">
+      <div class="top-left js-logo">
+        <div class="web-name ">Precisely</div>
+        <img class="logo " src="./image/logo.svg" alt="logo">
       </div>
       <div class="top-right">
-        <!--<svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11 2C6.03125 2 2 6.03125 2 11C2 15.9688 6.03125 20 11 20C13.2109 20 15.2109 19.2109 16.75 17.9062L20.7188 21.875C21.0938 22.25 21.7188 22.25 22.0938 21.875C22.4688 21.5 22.4688 20.875 22.0938 20.5L18.125 16.5312C19.4062 15 20.1875 13 20.1875 11C20.1875 6.03125 16.1562 2 11 2ZM4 11C4 7.14062 7.14062 4 11 4C14.8594 4 18 7.14062 18 11C18 14.8594 14.8594 18 11 18C7.14062 18 4 14.8594 4 11Z" fill="currentColor"/>
-        </svg>-->  
         <input id="autocomplete" class="search-bar" type="text" placeholder="Search a place">
-        <!--<div id="searchTextField" class="details"></div>-->
       </div>
     </div>
 
@@ -58,7 +56,6 @@
 
     <div id="summary-panel"></div>
 
-    <div id="map"></div>
 
 
 </body>
@@ -73,16 +70,32 @@
 
 <script>
 
-function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 1.559838517589971, lng: 103.63474313801149 }, 
-      zoom: 18,
-    });
+async function initMap() {
+  let position={
+  lat:1.559838517589971,
+  lng: 103.63474313801149
+}
+  const { Map } = await google.maps.importLibrary("maps");
+
+  map = new Map(document.getElementById("map"), {
+    center: { lat: 1.559838517589971, lng: 103.63474313801149 },
+    zoom: 8,
+    mapId: "DEMO_MAP_ID",
+  });
+
+
+
+    return map;
   }
+  window.initMap = initMap;
+
 </script>
-<script 
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8&loading=async&libraries=places&callback=initMap" async >
+<script async
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbZGFRbee76UzQiNFn6cSA0Hcyb7K2uh8&loading=async&libraries=places&callback=initMap" defer  >
 </script>
+
+
+
 
 
 

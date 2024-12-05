@@ -1,6 +1,6 @@
-//calculate distance
 
-export function getDistance(lat1,lon1,lat2,lon2) {
+//calculate distance
+ function getDistance(lat1,lon1,lat2,lon2) {
   const toRad = (value) => {
     return value * Math.PI / 180;
   }
@@ -14,6 +14,7 @@ export function getDistance(lat1,lon1,lat2,lon2) {
     ; 
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   var d = R * c* 1000; // Distance in m
+  console.log('answer from getDistance: ',d)
   return d;
 }
 
@@ -25,6 +26,7 @@ export function checkProximity(busPosition,busStops) {
       stop.position.lat,
       stop.position.lng
     );
+    console.log('distance: ',distance)
 
     if (distance <= stop.radius) {
       // Turn the indicator yellow
@@ -39,7 +41,7 @@ export function checkProximity(busPosition,busStops) {
   });
 }
 
-export function updateIndicatorColor(stopId, color) {
+ function updateIndicatorColor(stopId, color) {
   const indicator = document.querySelector(`.bus-stop-${stopId}`);
   if (indicator) {
     if (color === "yellow") {
@@ -54,12 +56,8 @@ export function updateIndicatorColor(stopId, color) {
   }
 }
 
-export function updateMarkerPosition(position) {
-  const busPosition = {
-    lat: position.lat,
-    lng: position.lng,
-  };
+ export function updateMarkerPositionDis(position,busStops) {
 
-  checkProximity(busPosition); // Check for proximity to bus stops
-  //marker.setPosition(busPosition); // Update marker position
+  console.log('Data from firestore: ',position)
+  checkProximity(position,busStops); // Check for proximity to bus stops
 }

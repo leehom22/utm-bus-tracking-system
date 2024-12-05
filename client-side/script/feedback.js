@@ -1,9 +1,13 @@
 import { showNews } from "./news.js";
 import { showBusRoute } from "./location.js";
 import { toogle } from "./main.js";
+import { db } from "./firestore.js";
+import {  collection, addDoc,serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+//firestore
 
 let finalRating=``;
 let finalComment=``;
+let dataComment=''; //comment to store to database
 let isFeedbackVisible=false;
 export function showFeedback(openClose=isFeedbackVisible) {
   isFeedbackVisible=openClose
@@ -77,7 +81,7 @@ stars.forEach((star)=>{
 })
 
 //submit star rating to show comment tab
-    document.querySelector('.js-submit-button').addEventListener('click', () => {
+    document.querySelector('.js-submit-button').addEventListener('click', async() => {
       if(finalRating){
         let comment = `
         <div class="feedback">
@@ -99,10 +103,34 @@ stars.forEach((star)=>{
 
         finalComment=document.querySelector('.js-textbox').innerHTML;
 
+        console.log('finalComment: ',finalComment)
         document.querySelector('.js-submit-comment-button').addEventListener('click',()=>{
 
           const textbox=document.querySelector('.js-textbox');
-  
+
+          dataComment=textbox.value;
+          console.log('comment: ',textbox.value)
+
+          if (db){
+            console.log('successfully setup firestore')
+          }else{
+            console.log('fail to setup firestore')
+          }
+
+          async function storeData(){
+            const feedbackRef=await addDoc(collection(db,'feedback'),{
+              dataComment,
+              finalRating,
+              timestamp:serverTimestamp()
+            }) 
+            if(feedbackRef){
+              console.log('data store to firestore')
+            }else{
+              console.log('fail to store data to firestore')
+            }
+          } 
+          storeData();
+
           if(textbox.value){
             const submitComment=`
             <div class="feedback">
